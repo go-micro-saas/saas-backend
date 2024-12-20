@@ -1,4 +1,4 @@
-package testingdapi
+package testingapi
 
 import (
 	servicev1 "github.com/go-micro-saas/service-layout/api/testing-service/v1/services"

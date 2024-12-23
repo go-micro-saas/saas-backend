@@ -5,7 +5,7 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	bizrepos "github.com/go-micro-saas/service-layout/app/testing-service/internal/biz/repo"
 	errorpkg "github.com/ikaiguang/go-srv-kit/kratos/error"
-	"gitlab.realibox.cn/hubv3tools/protobuf/types/known/emptypb"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 type testingEvent struct {

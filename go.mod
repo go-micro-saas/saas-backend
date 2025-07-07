@@ -1,4 +1,4 @@
-module github.com/go-micro-saas/service-layout
+module github.com/go-micro-saas/saas-backend
 
 go 1.22
 

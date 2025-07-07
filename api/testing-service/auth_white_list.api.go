@@ -1,7 +1,7 @@
 package testingapi
 
 import (
-	servicev1 "github.com/go-micro-saas/service-layout/api/testing-service/v1/services"
+	servicev1 "github.com/go-micro-saas/saas-backend/api/testing-service/v1/services"
 	_ "github.com/gorilla/websocket"
 	middlewareutil "github.com/ikaiguang/go-srv-kit/service/middleware"
 )

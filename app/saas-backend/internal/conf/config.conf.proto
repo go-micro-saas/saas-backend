@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package saas.api.backend.conf;
+
+option go_package           = "github.com/go-micro-saas/saas-backend/app/saas-backend/internal/conf;conf";
+option java_multiple_files  = true;
+option java_package         = "saas.api.backend.conf";
+option java_outer_classname = "SaasApiBackendConf";
+
+import "validate/validate.proto";
+
+message ServiceConfig {
+  message SaasBackend {
+    // Snowflake nodeid for snowflake
+    message Snowflake {
+      bool enable                  = 1;
+      string instance_id           = 2 [(validate.rules).string = { min_len: 1 }];
+      string instance_name         = 3;
+      map<string, string> metadata = 4;
+    }
+
+    Snowflake snowflake = 1;
+  }
+  SaasBackend saas_backend = 1;
+}

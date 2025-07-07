@@ -95,7 +95,8 @@ include api/saas-backend/v1/makefile_protoc.mk
 
 # run
 include app/all-in-one/makefile_run.mk
-include app/testing-service/cmd/makefile_run.mk
+#include app/testing-service/cmd/makefile_run.mk
+include app/saas-backend/cmd/makefile_run.mk
 
 # build
 #include devops/makefile_cicd.mk

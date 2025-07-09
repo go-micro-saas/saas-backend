@@ -6,53 +6,26 @@ package serviceexporter
 import (
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"github.com/go-micro-saas/account-service/app/account-service/internal/biz/biz"
-	events "github.com/go-micro-saas/account-service/app/account-service/internal/biz/event"
-	"github.com/go-micro-saas/account-service/app/account-service/internal/conf"
-	"github.com/go-micro-saas/account-service/app/account-service/internal/data/cache"
-	"github.com/go-micro-saas/account-service/app/account-service/internal/data/data"
-	"github.com/go-micro-saas/account-service/app/account-service/internal/service/dto"
-	"github.com/go-micro-saas/account-service/app/account-service/internal/service/service"
-	snowflakeapi "github.com/go-micro-saas/service-api/app/snowflake-service"
+	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/biz/biz"
+	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/data/data"
+	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/service/service"
 	"github.com/google/wire"
 	cleanuputil "github.com/ikaiguang/go-srv-kit/service/cleanup"
 	setuputil "github.com/ikaiguang/go-srv-kit/service/setup"
 )
 
-func exportServices(launcherManager setuputil.LauncherManager, hs *http.Server, gs *grpc.Server) (cleanuputil.CleanupManager, func(), error) {
+func exportServices(launcherManager setuputil.LauncherManager, hs *http.Server, gs *grpc.Server) (cleanuputil.CleanupManager, error) {
 	panic(wire.Build(
 		setuputil.GetLogger,
-		setuputil.GetRecommendDBConn,
-		setuputil.GetAuthManager,
-		setuputil.GetServiceAPIManager,
-		setuputil.GetRabbitmqConn,
-		setuputil.GetRedisClient,
-		// conf
-		setuputil.GetConfig,
-		conf.GetServiceConfig,
-		dto.ToBoSendEmailCodeConfig,
-		// idGenerator
-		dto.ToPbGetNodeIdReq, dto.GetNodeIDOptions, snowflakeapi.GetSingletonIDGeneratorByHTTPAPI,
-		dto.ToBoVerifyCodeConfig,
+		//setuputil.GetRecommendDBConn,
 		// data
-		data.NewUserDataRepo,
-		data.NewUserRegPhoneDataRepo,
-		data.NewUserRegEmailDataRepo,
-		data.NewUserVerifyCodeRepo,
-		data.NewUserEventHistoryRepo,
-		caches.NewVerifyCodeCache,
+		data.NewBackendData,
 		// biz
-		biz.NewUserAuthBiz,
-		biz.NewSendEmailCodeBiz,
-		biz.NewAccountBiz,
-		// event
-		events.NewSendEmailCodeEventRepo,
+		biz.NewBackendBiz,
 		// service
-		service.NewUserAuthService,
-		service.NewAccountService,
-		service.NewAccountEventService,
+		service.NewBackendV1Service,
 		// register services
 		service.RegisterServices,
 	))
-	return nil, nil, nil
+	return nil, nil
 }

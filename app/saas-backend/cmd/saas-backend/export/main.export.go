@@ -1,9 +1,9 @@
 package serviceexporter
 
 import (
-	accountapi "github.com/go-micro-saas/account-service/api/account-service"
-	dbmigrate "github.com/go-micro-saas/account-service/app/account-service/cmd/database-migration/migrate"
-	"github.com/go-micro-saas/account-service/app/account-service/internal/conf"
+	testingapi "github.com/go-micro-saas/saas-backend/api/testing-service"
+	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/conf"
+	"github.com/go-micro-saas/saas-backend/app/testing-service/cmd/database-migration/migrate"
 	cleanuputil "github.com/ikaiguang/go-srv-kit/service/cleanup"
 	configutil "github.com/ikaiguang/go-srv-kit/service/config"
 	dbutil "github.com/ikaiguang/go-srv-kit/service/database"
@@ -18,7 +18,7 @@ func ExportServiceConfig() []configutil.Option {
 
 func ExportAuthWhitelist() []map[string]middlewareutil.TransportServiceKind {
 	return []map[string]middlewareutil.TransportServiceKind{
-		accountapi.GetAuthWhiteList(),
+		testingapi.GetAuthWhiteList(),
 	}
 }
 
@@ -31,8 +31,8 @@ func ExportServices(launcherManager setuputil.LauncherManager, serverManager ser
 	if err != nil {
 		return nil, err
 	}
-	//return exportServices(launcherManager, hs, gs)
-	return cleanuputil.Merge(exportServices(launcherManager, hs, gs))
+	return exportServices(launcherManager, hs, gs)
+	//return serverutil.MergeCleanup(exportServices(launcherManager, hs, gs))
 }
 
 func ExportServicesWithDatabaseMigration(launcherManager setuputil.LauncherManager, serverManager serverutil.ServerManager) (cleanuputil.CleanupManager, error) {

@@ -81,6 +81,7 @@ generate:
 	#go mod tidy
 	#go generate ./...
 	wire ./app/testing-service/cmd/testing-service/export
+	wire ./app/saas-backend/cmd/saas-backend/export
 
 # ===== include =====
 # ===== include =====

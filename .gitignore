@@ -110,6 +110,9 @@ openapi.yaml
 !/docs/api/*.swagger.json
 !/docs/api/openapi.yaml
 
+# third party
+./third_party/github.com/go-micro-saas/**/*.mk
+
 # test
 _output
 mytest

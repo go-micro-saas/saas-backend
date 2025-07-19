@@ -1,7 +1,7 @@
 package serviceexporter
 
 import (
-	testingapi "github.com/go-micro-saas/saas-backend/api/testing-service"
+	backendapi "github.com/go-micro-saas/saas-backend/api/saas-backend"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/conf"
 	"github.com/go-micro-saas/saas-backend/app/testing-service/cmd/database-migration/migrate"
 	cleanuputil "github.com/ikaiguang/go-srv-kit/service/cleanup"
@@ -18,7 +18,7 @@ func ExportServiceConfig() []configutil.Option {
 
 func ExportAuthWhitelist() []map[string]middlewareutil.TransportServiceKind {
 	return []map[string]middlewareutil.TransportServiceKind{
-		testingapi.GetAuthWhiteList(),
+		backendapi.GetAuthWhiteList(),
 	}
 }
 

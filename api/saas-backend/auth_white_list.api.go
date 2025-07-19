@@ -1,4 +1,4 @@
-package testingapi
+package backendapi
 
 import (
 	servicev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/services"

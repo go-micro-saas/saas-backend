@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package saas.api.backend.resourcev1;
+import "validate/validate.proto";
 
 // 多语言特定包名，用于源代码引用
 option go_package           = "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/resources;resourcev1";

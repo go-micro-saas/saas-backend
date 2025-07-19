@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package saas.api.backend.servicev1;
+
+// 多语言特定包名，用于源代码引用
+option go_package           = "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/services;servicev1";
+option java_multiple_files  = true;
+option java_package         = "saas.api.backend.servicev1";
+option java_outer_classname = "SaasApiBackendServiceV1";
+
+import "google/api/annotations.proto";
+import "api/saas-backend/v1/resources/backend.resource.v1.proto";
+
+// SrvSaasBackendAuthV1 ...
+service SrvSaasBackendAuthV1 {
+  // 身份验证-Email登录
+  rpc LoginByEmail(resourcev1.LoginByEmailReq) returns (resourcev1.LoginResp) {
+    option (google.api.http) = {
+      post: "/api/v1/saas-backend/auth/login-by-email"
+      body: "*"
+    };
+  }
+  // 身份验证-手机登录
+  rpc LoginByPhone(resourcev1.LoginByPhoneReq) returns (resourcev1.LoginResp) {
+    option (google.api.http) = {
+      post: "/api/v1/saas-backend/auth/login-by-phone"
+      body: "*"
+    };
+  }
+}

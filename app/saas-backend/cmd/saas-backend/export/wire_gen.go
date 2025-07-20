@@ -11,7 +11,9 @@ import (
 	"github.com/go-kratos/kratos/v2/transport/http"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/biz/biz"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/data/data"
+	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/service/dto"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/service/service"
+	"github.com/go-micro-saas/service-api/app/account-service"
 	"github.com/ikaiguang/go-srv-kit/service/cleanup"
 	"github.com/ikaiguang/go-srv-kit/service/setup"
 )
@@ -24,7 +26,20 @@ func exportServices(launcherManager setuputil.LauncherManager, hs *http.Server, 
 		return nil, err
 	}
 	backendDataRepo := data.NewBackendData(logger)
-	backendBizRepo := biz.NewBackendBiz(logger, backendDataRepo)
+	serviceAPIManager, err := setuputil.GetServiceAPIManager(launcherManager)
+	if err != nil {
+		return nil, err
+	}
+	v := dto.GetAccountV1ServiceNameForGRPC()
+	srvUserAuthV1Client, err := accountapi.NewUserAuthV1GRPCClient(serviceAPIManager, v...)
+	if err != nil {
+		return nil, err
+	}
+	srvAccountV1Client, err := accountapi.NewAccountV1GRPCClient(serviceAPIManager, v...)
+	if err != nil {
+		return nil, err
+	}
+	backendBizRepo := biz.NewBackendBiz(logger, backendDataRepo, srvUserAuthV1Client, srvAccountV1Client)
 	srvSaasBackendV1Server := service.NewBackendV1Service(logger, backendBizRepo)
 	srvSaasBackendAuthV1Server := service.NewBackendAuthV1Service(logger, backendBizRepo)
 	cleanupManager, err := service.RegisterServices(hs, gs, srvSaasBackendV1Server, srvSaasBackendAuthV1Server)

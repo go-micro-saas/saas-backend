@@ -14,5 +14,9 @@ func GetAuthWhiteList() map[string]middlewareutil.TransportServiceKind {
 	// 测试
 	whiteList[servicev1.OperationSrvSaasBackendV1Ping] = middlewareutil.TransportServiceKindALL
 
+	// auth
+	whiteList[servicev1.OperationSrvSaasBackendAuthV1LoginByEmail] = middlewareutil.TransportServiceKindALL
+	whiteList[servicev1.OperationSrvSaasBackendAuthV1LoginByPhone] = middlewareutil.TransportServiceKindALL
+
 	return whiteList
 }

@@ -24,9 +24,9 @@ func NewBackendAuthV1Service(logger log.Logger, testingBiz bizrepos.BackendBizRe
 }
 
 func (s *backendAuthV1Service) LoginByEmail(ctx context.Context, req *resources.LoginByEmailReq) (*resources.LoginResp, error) {
-	return s.UnimplementedSrvSaasBackendAuthV1Server.LoginByEmail(ctx, req)
+	return s.backendBiz.LoginByEmail(ctx, req)
 }
 
 func (s *backendAuthV1Service) LoginByPhone(ctx context.Context, req *resources.LoginByPhoneReq) (*resources.LoginResp, error) {
-	return s.UnimplementedSrvSaasBackendAuthV1Server.LoginByPhone(ctx, req)
+	return s.backendBiz.LoginByPhone(ctx, req)
 }

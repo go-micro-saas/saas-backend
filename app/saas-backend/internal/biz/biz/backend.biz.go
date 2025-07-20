@@ -7,23 +7,32 @@ import (
 	bizrepos "github.com/go-micro-saas/saas-backend/app/saas-backend/internal/biz/repo"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/data/po"
 	datarepos "github.com/go-micro-saas/saas-backend/app/saas-backend/internal/data/repo"
+	accountservicev1 "github.com/go-micro-saas/service-api/api/account-service/v1/services"
 	"time"
 )
 
 type backendBiz struct {
-	log         *log.Helper
+	log *log.Helper
+
 	backendData datarepos.BackendDataRepo
+
+	userAuthV1Client accountservicev1.SrvUserAuthV1Client
+	accountV1Client  accountservicev1.SrvAccountV1Client
 }
 
 func NewBackendBiz(
 	logger log.Logger,
 	testingData datarepos.BackendDataRepo,
+	userAuthV1Client accountservicev1.SrvUserAuthV1Client,
+	accountV1Client accountservicev1.SrvAccountV1Client,
 ) bizrepos.BackendBizRepo {
-	logHelper := log.NewHelper(log.With(logger, "module", "test-service/biz/biz"))
+	logHelper := log.NewHelper(log.With(logger, "module", "saas-backend/biz/biz"))
 
 	return &backendBiz{
-		log:         logHelper,
-		backendData: testingData,
+		log:              logHelper,
+		backendData:      testingData,
+		userAuthV1Client: userAuthV1Client,
+		accountV1Client:  accountV1Client,
 	}
 }
 

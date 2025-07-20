@@ -10,7 +10,7 @@ import (
 )
 
 type backendV1Service struct {
-	servicev1.UnsafeSrvSaasBackendV1Server
+	servicev1.UnimplementedSrvSaasBackendV1Server
 
 	log        *log.Helper
 	backendBiz bizrepos.BackendBizRepo

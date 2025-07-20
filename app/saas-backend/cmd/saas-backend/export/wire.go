@@ -23,7 +23,7 @@ func exportServices(launcherManager setuputil.LauncherManager, hs *http.Server, 
 		// biz
 		biz.NewBackendBiz,
 		// service
-		service.NewBackendV1Service,
+		service.NewBackendV1Service, service.NewBackendAuthV1Service,
 		// register services
 		service.RegisterServices,
 	))

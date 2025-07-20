@@ -26,6 +26,7 @@ define protoc_protobuf
 			--proto_path=. \
 			--proto_path=$(GOPATH)/src \
 			--proto_path=./third_party \
+			--proto_path=./third_party/github.com/go-micro-saas/service-api \
 			--go_out=paths=source_relative:. \
 			--go-grpc_out=paths=source_relative:. \
 			--go-http_out=paths=source_relative:. \

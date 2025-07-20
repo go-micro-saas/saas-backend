@@ -26,7 +26,8 @@ func exportServices(launcherManager setuputil.LauncherManager, hs *http.Server, 
 	backendDataRepo := data.NewBackendData(logger)
 	backendBizRepo := biz.NewBackendBiz(logger, backendDataRepo)
 	srvSaasBackendV1Server := service.NewBackendV1Service(logger, backendBizRepo)
-	cleanupManager, err := service.RegisterServices(hs, gs, srvSaasBackendV1Server)
+	srvSaasBackendAuthV1Server := service.NewBackendAuthV1Service(logger, backendBizRepo)
+	cleanupManager, err := service.RegisterServices(hs, gs, srvSaasBackendV1Server, srvSaasBackendAuthV1Server)
 	if err != nil {
 		return nil, err
 	}

@@ -1,7 +1,7 @@
 package dto
 
 import (
-	resourcev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/resources"
+	resourcev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/resources/auth"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/biz/bo"
 )
 

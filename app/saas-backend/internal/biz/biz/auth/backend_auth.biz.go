@@ -1,13 +1,18 @@
-package biz
+package auth
 
 import (
 	"context"
+
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/biz/bo"
 	bizrepos "github.com/go-micro-saas/saas-backend/app/saas-backend/internal/biz/repo"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/data/po"
 	datarepos "github.com/go-micro-saas/saas-backend/app/saas-backend/internal/data/repo"
+	resources "github.com/go-micro-saas/service-api/api/account-service/v1/resources"
 	accountservicev1 "github.com/go-micro-saas/service-api/api/account-service/v1/services"
+	apiutil "github.com/go-micro-saas/service-api/util"
+	errorpkg "github.com/ikaiguang/go-srv-kit/kratos/error"
+
 	"time"
 )
 
@@ -53,4 +58,20 @@ func (s *backendBiz) toHelloWorkModel(param *bo.HelloWorldParam) *po.HelloWorld 
 		RequestMessage: param.Message,
 	}
 	return res
+}
+
+func (s *backendBiz) LoginByEmail(ctx context.Context, req *resources.LoginByEmailReq) (*resources.LoginResp, error) {
+	resp, err := s.userAuthV1Client.LoginByEmail(ctx, req)
+	if e := apiutil.CheckAPIResponse(resp, err); e != nil {
+		return nil, errorpkg.WithStack(e)
+	}
+	return resp, nil
+}
+
+func (s *backendBiz) LoginByPhone(ctx context.Context, req *resources.LoginByPhoneReq) (*resources.LoginResp, error) {
+	resp, err := s.userAuthV1Client.LoginByPhone(ctx, req)
+	if e := apiutil.CheckAPIResponse(resp, err); e != nil {
+		return nil, errorpkg.WithStack(e)
+	}
+	return resp, nil
 }

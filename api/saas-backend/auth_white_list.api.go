@@ -1,7 +1,7 @@
 package backendapi
 
 import (
-	servicev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/services"
+	servicev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/services/auth"
 	_ "github.com/gorilla/websocket"
 	middlewareutil "github.com/ikaiguang/go-srv-kit/service/middleware"
 )

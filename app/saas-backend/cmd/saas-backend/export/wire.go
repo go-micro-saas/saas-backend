@@ -6,10 +6,11 @@ package serviceexporter
 import (
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/biz/biz"
+	auth2 "github.com/go-micro-saas/saas-backend/app/saas-backend/internal/biz/biz/auth"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/data/data"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/service/dto"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/service/service"
+	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/service/service/auth"
 	accountapi "github.com/go-micro-saas/service-api/app/account-service"
 	"github.com/google/wire"
 	cleanuputil "github.com/ikaiguang/go-srv-kit/service/cleanup"
@@ -30,9 +31,9 @@ func exportServices(launcherManager setuputil.LauncherManager, hs *http.Server, 
 		//dto.GetAccountV1ServiceNameForHTTP,
 		// accountapi.NewAccountV1HTTPClient,
 		// biz
-		biz.NewBackendBiz,
+		auth2.NewBackendBiz,
 		// service
-		service.NewBackendV1Service, service.NewBackendAuthV1Service,
+		auth.NewBackendV1Service, auth.NewBackendAuthV1Service,
 		// register services
 		service.RegisterServices,
 	))

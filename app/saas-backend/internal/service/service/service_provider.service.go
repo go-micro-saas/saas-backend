@@ -1,11 +1,12 @@
 package service
 
 import (
+	stdlog "log"
+
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	servicev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/services"
+	servicev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/services/auth"
 	cleanuputil "github.com/ikaiguang/go-srv-kit/service/cleanup"
-	stdlog "log"
 )
 
 // RegisterServices 注册服务

@@ -1,10 +1,11 @@
-package service
+package auth
 
 import (
 	"context"
+
 	"github.com/go-kratos/kratos/v2/log"
-	resourcev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/resources"
-	servicev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/services"
+	resourcev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/resources/auth"
+	servicev1 "github.com/go-micro-saas/saas-backend/api/saas-backend/v1/services/auth"
 	bizrepos "github.com/go-micro-saas/saas-backend/app/saas-backend/internal/biz/repo"
 	"github.com/go-micro-saas/saas-backend/app/saas-backend/internal/service/dto"
 )
